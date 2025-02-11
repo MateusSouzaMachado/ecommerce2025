@@ -2,7 +2,7 @@ package com.senai.ecommerce.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import java.sql.Timestamp;
+
 import java.time.Instant;
 
 @Data
@@ -19,4 +19,9 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
+
+
 }

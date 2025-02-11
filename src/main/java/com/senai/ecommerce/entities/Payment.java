@@ -17,4 +17,7 @@ public class Payment {
     private Long id;
     private Instant moment;
 
+    @OneToOne
+    @MapsId//maps the id of the order to the payment
+    private Order order;
 }
