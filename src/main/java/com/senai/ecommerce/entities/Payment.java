@@ -4,7 +4,8 @@ package com.senai.ecommerce.entities;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.sql.Timestamp;
+
+import java.time.Instant;
 
 @Data
 @Entity
@@ -14,6 +15,6 @@ public class Payment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Timestamp moment;
+    private Instant moment;
 
 }
