@@ -1,17 +1,18 @@
 package com.senai.ecommerce.entities;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.Instant;
 
 @Data
 @Entity
-@Table(name = "tb_ordem_item")
+@Table(name = "tb_order_item")
 public class OrdemItem {
+
     @EmbeddedId
     private OrdemItemPK id = new OrdemItemPK();
 
-    private int quantidty;
+    private int quantity;
     private double price;
 }
