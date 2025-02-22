@@ -20,23 +20,24 @@ public class PaymentService {
         return paymentRepository.findAll().stream().map(payment -> new PaymentDTO(payment.getId(),payment.getMoment())).toList();
     }
 
-
+    @Transactional
     public PaymentDTO create(PaymentDTO paymentDTO) {
         Payment payment = new Payment();
 
         payment.setMoment(paymentDTO.getMoment());
-        payment =paymentRepository.save(payment);
+        payment = paymentRepository.save(payment);
         paymentDTO = new PaymentDTO(payment.getId(),payment.getMoment());
 
         return paymentDTO;
     }
-
+    @Transactional
     public PaymentDTO findById(Long id) {
         Payment payment = new Payment();
         payment = paymentRepository.findById(id).orElseThrow(() -> new RuntimeException("Payment not found"));
         return new PaymentDTO(payment.getId(),payment.getMoment());
     }
 
+    @Transactional
     public PaymentDTO update(Long id, PaymentDTO paymentDTO) {
         Payment payment = new Payment();
         payment = paymentRepository.findById(id).orElseThrow(() -> new RuntimeException("Payment not found"));
@@ -45,6 +46,7 @@ public class PaymentService {
         return new PaymentDTO(payment.getId(),payment.getMoment());
     }
 
+    @Transactional
     public PaymentDTO delete(Long id) {
         Payment payment = new Payment();
         payment = paymentRepository.findById(id).orElseThrow(() -> new RuntimeException("Payment not found"));

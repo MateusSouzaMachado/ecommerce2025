@@ -1,10 +1,12 @@
 package com.senai.ecommerce.entities;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
 import java.util.HashSet;
 import java.util.Set;
+
+@AllArgsConstructor
 @Data
 @Entity
 @Table(name = "tb_product")
@@ -25,6 +27,9 @@ public class Product {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<Category> categories = new HashSet<>();
 
+    public Product() {
+
+    }
 }
 
 
