@@ -20,35 +20,28 @@ public class ProductController {
         return ResponseEntity.ok(list);
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<List<Product>> getProductById(@PathVariable Long id) {
-//        Optional<Product> product = productRepository.findById(id);
-//        return product.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> getProductById(@PathVariable Long id){
+        ProductDTO productDTO = productService.findById(id);
+        return ResponseEntity.ok(productDTO);
+    }
+
+    @PostMapping
+    public ResponseEntity<ProductDTO> createProduct(@RequestBody ProductDTO productDTO){
+        ProductDTO product = productService.create(productDTO);
+        return ResponseEntity.ok(product);
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<ProductDTO> updateProduct(@PathVariable Long id, @RequestBody ProductDTO productDTO){
+        ProductDTO product = productService.update(id,productDTO);
+        return ResponseEntity.ok(product);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> deleteProduct(@PathVariable Long id){
+        ProductDTO product = productService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 //
-//    @PostMapping
-//    public Product createProduct(@RequestBody Product product) {
-//        return productRepository.save(product);
-//    }
-//
-//    @PutMapping("/{id}")
-//    public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product productDetails) {
-//        return productRepository.findById(id).map(product -> {
-//            product.setName(productDetails.getName());
-//            product.setPrice(productDetails.getPrice());
-//            product.setDescription(productDetails.getDescription());
-//            product.setImaUrl(productDetails.getImaUrl());
-//            product.setCategories(productDetails.getCategories());
-//            Product updatedProduct = productRepository.save(product);
-//            return ResponseEntity.ok(updatedProduct);
-//        }).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
-//
-//    @DeleteMapping("/{id}")
-//    public ResponseEntity<Object> deleteProduct(@PathVariable Long id) {
-//        return productRepository.findById(id).map(product -> {
-//            productRepository.delete(product);
-//            return ResponseEntity.noContent().build();
-//        }).orElseGet(() -> ResponseEntity.notFound().build());
-//    }
 }

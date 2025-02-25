@@ -1,15 +1,18 @@
 package com.senai.ecommerce.dtos;
 
+import com.senai.ecommerce.entities.Category;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @AllArgsConstructor
+@NoArgsConstructor
 @Data
 public class ProductDTO {
 
@@ -28,5 +31,13 @@ public class ProductDTO {
     private List<CategoryDTO> categories;
 
     public ProductDTO(Long id, String name, double price, String description, String imaUrl) {
+    }
+
+    public void setCategories(List<Category> categories) {
+        this.categories = categories.stream().map(category -> new CategoryDTO(category.getName(),category.getId())).toList();
+    }
+
+    public @NotEmpty(message = "Categories is required") List<CategoryDTO> getCategories() {
+        return categories;
     }
 }
